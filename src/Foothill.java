@@ -327,7 +327,7 @@ class ITunes
    }
    
    /**
-    * displays values of one class object
+    * displays field values of one class object
     */
    void display()
    {
@@ -335,23 +335,24 @@ class ITunes
    }
    
    /**
-    * returns formatted String with play time shown in minutes and seconds
+    * returns formatted String with totalTime shown in minutes and seconds.
+    * String has no leading or trailing spaces.
     * @return specified String
     */
    String timeInMinutesAndSeconds()
    {
       int minutes = totalTime / MILLISEC_PER_MIN;
       int seconds = (totalTime % MILLISEC_PER_MIN) / MILLISEC_PER_SEC;
-      String rtnVal = "";
+      String rtnStr = "";
       if (minutes != 0)
       {
-         rtnVal += minutes + " minutes";
+         rtnStr += minutes + " minutes";
          if (seconds == 0)
-            return rtnVal;
+            return rtnStr;
          else 
-            rtnVal += " ";
+            rtnStr += " ";
       }
-      return rtnVal + seconds + " seconds";
+      return rtnStr + seconds + " seconds";
       // return (minutes == 0 ? "" : "" + minutes + " minutes") 
            // + (seconds == 0 ? "" : " " + seconds + " seconds");
    }
