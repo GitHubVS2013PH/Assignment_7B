@@ -95,11 +95,11 @@ public class Foothill
       if (!inputSizesOK(nameArray, artistArray, rateArray, timeArray))
       {
          System.out.println("Error: not all input data arrays have length of "
-               + ARRAY_SIZE);
+               + Foothill.ARRAY_SIZE);
          System.exit(1);
       }
       
-      ITunes[] tunesArray = new ITunes[ARRAY_SIZE];
+      ITunes[] tunesArray = new ITunes[Foothill.ARRAY_SIZE];
       for (int i = 0; i < nameArray.length; ++i)
       {
          tunesArray[i] = new ITunes(nameArray[i], artistArray[i],
@@ -128,8 +128,10 @@ public class Foothill
    private static boolean inputSizesOK(String[] nameArr, String[] artistArr,
          int[] rateArr, int[] timeArr)
    {
-      if (nameArr.length == ARRAY_SIZE && artistArr.length == ARRAY_SIZE
-            && rateArr.length == ARRAY_SIZE && timeArr.length == ARRAY_SIZE)
+      if (nameArr.length == Foothill.ARRAY_SIZE 
+            && artistArr.length == Foothill.ARRAY_SIZE
+            && rateArr.length == Foothill.ARRAY_SIZE 
+            && timeArr.length == Foothill.ARRAY_SIZE)
          return true;
       return false;
    }
@@ -184,13 +186,13 @@ class ITunes
    ITunes(String name, String artist, int bitrate, int totalTime)
    {
       if (!setName(name))
-         this.name = DEFAULT_STRING;
+         this.name = ITunes.DEFAULT_STRING;
       if (!setArtist(artist))
-         this.artist = DEFAULT_STRING;
+         this.artist = ITunes.DEFAULT_STRING;
       if (!setBitrate(bitrate))
-         this.bitrate = DEFAULT_BITRATE;
+         this.bitrate = ITunes.DEFAULT_BITRATE;
       if (!setTotaltime(totalTime))
-         this.totalTime = DEFAULT_PLAY_TIME;
+         this.totalTime = ITunes.DEFAULT_PLAY_TIME;
    }
    
    // validators
@@ -203,7 +205,8 @@ class ITunes
     */
    static boolean validString(String str)
    {
-      if (str.length() >= MIN_STR_LENGTH && str.length() <= MAX_STR_LENGTH)
+      if (str.length() >= ITunes.MIN_STR_LENGTH 
+            && str.length() <= ITunes.MAX_STR_LENGTH)
          return true;
       return false;
    }
@@ -217,7 +220,7 @@ class ITunes
     */
    static boolean validBitrate(int bitrate)
    {
-      if (bitrate >= MIN_BITRATE && bitrate <= MAX_BITRATE)
+      if (bitrate >= ITunes.MIN_BITRATE && bitrate <= ITunes.MAX_BITRATE)
          return true;
       return false;
    }
@@ -231,7 +234,8 @@ class ITunes
     */
    static boolean validTotalTime(int totalTime)
    {
-      if (totalTime >= MIN_PLAY_TIME && totalTime <= MAX_PLAY_TIME)
+      if (totalTime >= ITunes.MIN_PLAY_TIME 
+            && totalTime <= ITunes.MAX_PLAY_TIME)
          return true;
       return false;
    }
@@ -320,10 +324,10 @@ class ITunes
     */
    void setDefaults()
    {
-      name = DEFAULT_STRING;
-      artist = DEFAULT_STRING;
-      bitrate = DEFAULT_BITRATE;
-      totalTime = DEFAULT_PLAY_TIME;      
+      name = ITunes.DEFAULT_STRING;
+      artist = ITunes.DEFAULT_STRING;
+      bitrate = ITunes.DEFAULT_BITRATE;
+      totalTime = ITunes.DEFAULT_PLAY_TIME;      
    }
    
    /**
@@ -341,8 +345,9 @@ class ITunes
     */
    String timeInMinutesAndSeconds()
    {
-      int minutes = totalTime / MILLISEC_PER_MIN;
-      int seconds = (totalTime % MILLISEC_PER_MIN) / MILLISEC_PER_SEC;
+      int minutes = totalTime / ITunes.MILLISEC_PER_MIN;
+      int seconds = (totalTime % ITunes.MILLISEC_PER_MIN) 
+            / ITunes.MILLISEC_PER_SEC;
       String rtnStr = "";
       if (minutes != 0)
       {
