@@ -14,6 +14,7 @@ public class Foothill
  */
    public static void  main(String[] args)
    {   
+      // instantiate 4 ITunes objects all with legal parameters
       ITunes itune1 = new ITunes();
       ITunes itune2 = new ITunes("Stairway to Heaven",
             "Led Zeppelin", 64, 5 * 60 * 1000);
@@ -22,10 +23,16 @@ public class Foothill
       ITunes itune4 = new ITunes("Ave Maria", 
             "Chanticleer", 705, 4 * 60 * 1000 + 2000);
       
-      System.out.println("Displaying original instantiated objects");
+      System.out.println("*** Displaying original instantiated objects");
+      System.out.println("First object using default constructor and other"
+            + " objects using legal parameters");
+      System.out.println("\niTune1");
       itune1.display();
+      System.out.println("\niTune2");
       itune2.display();
+      System.out.println("\niTune3");
       itune3.display();
+      System.out.println("\niTune4");
       itune4.display();
       
       // mutate objects
@@ -37,10 +44,14 @@ public class Foothill
       itune3.setName("5 Foot 1");
       itune3.setArtist("Iggy Pop");
       
-      System.out.println("\nDisplaying after mutations");
+      System.out.println("\n*** Displaying after legal mutations in 2 objects");
+      System.out.println("\niTune1, name, artist, bitrate & totalTime mutated");
       itune1.display();
+      System.out.println("\niTune2 unmutated");
       itune2.display();
+      System.out.println("\niTune3, name and artist mutated");
       itune3.display();
+      System.out.println("\niTune4 unmutated");
       itune4.display();
             
       // setDefault all objects
@@ -49,14 +60,19 @@ public class Foothill
       itune3.setDefaults();
       itune4.setDefaults();
 
-      System.out.println("\nDisplaying after invoking setDefaults");
+      System.out.println("\n*** Displaying after invoking setDefaults");
+      System.out.println("All objects should display their default values");
+      System.out.println("\niTune1");
       itune1.display();
+      System.out.println("\niTune2");
       itune2.display();
+      System.out.println("\niTune3");
       itune3.display();
+      System.out.println("\niTune4");
       itune4.display();
 
       // test mutator's boolean returns
-      System.out.println("\nTesting mutator's boolean returns");
+      System.out.println("\n*** Testing mutator's boolean returns");
       if (itune1.setArtist(""))
          System.out.println("Failed to reject bad setArtist mutation");
       else
@@ -78,16 +94,35 @@ public class Foothill
          System.out.println("Failed to accept good setName mutation");
       
       // test with arrays
-      System.out.println("\nTesting ITunes Class with arrays");
+      System.out.println("\n*** Testing ITunes Class with arrays");
+      System.out.println("Expected results are:");
+      System.out.println("\ntune 0: illegal bitrate, use default bitrate: " 
+            + ITunes.DEFAULT_BITRATE);
+      System.out.println("tune 1: illegal totalTime, use default totalTime: " 
+            + ITunes.DEFAULT_PLAY_TIME);
+      System.out.println("tune 2: all legal parameters");
+      System.out.println("tune 3: all legal parameters");
+      System.out.println("tune 4: all legal parameters");
+      System.out.println("tune 5: all legal parameters");
+      System.out.println("tune 6: illegal name, use default name: "
+            + ITunes.DEFAULT_STRING);
+      System.out.println("tune 7: illegal artist, use default artist: "
+            + ITunes.DEFAULT_STRING);
+      System.out.println("tune 8: illegal bitrate, use default bitrate: " 
+            + ITunes.DEFAULT_BITRATE);
+      System.out.println("tune 9: illegal totalTime, use default totalTime: " 
+            + ITunes.DEFAULT_PLAY_TIME);
+      System.out.println();
+      
       String[] nameArray = {"Stairway to Heaven", "Lust for Life",
             "Ave Maria", "Here Comes the Sun", "Overture of 1812", "Roadrunner",
             "", "Fugue in D Minor", "Victory Dance", "Denis"};
       String[] artistArray = {"Led Zeppelin" , "Iggy and the Stooges",
             "Chanticleer", "Beatles", "Boston Pops", "Jonathon Richman",
-            "50 Cent", "SF Philharmonic", "Elvis Costello", "Blondie"};
+            "50 Cent", "", "Elvis Costello", "Blondie"};
       int[] rateArray = {60, 705,
             100, 120, 700, 706,
-            450, 705, 64, 63};
+            450, 705, 63, 64};
       int[] timeArray = { 5000, 4999,
            245000, 250000, 720000, 636000,
            388500, 737400, 3600000, 3600001};
@@ -113,6 +148,19 @@ public class Foothill
          System.out.println();
       }
       
+      // tests for timeInMinutesAndSeconds()
+      System.out.println("tests for leading and trailing spaces in "
+            + "timeInMinutesAndSeconds()");
+      System.out.println("The following should show no leading or trailing "
+            + "spaces in \ntotalTime values and a single space between minutes "
+            + "and seconds:");
+      itune1.setTotaltime(5000);
+      itune2.setTotaltime(2* 60 * 1000 + 5000);
+      itune3.setTotaltime(60 * 60 * 1000);
+      System.out.println("-->" + itune1.timeInMinutesAndSeconds() + "<--");
+      System.out.println("-->" + itune2.timeInMinutesAndSeconds() + "<--");
+      System.out.println("-->" + itune3.timeInMinutesAndSeconds() + "<--"); 
+            
       System.exit(0);
    } // end main
    
@@ -349,6 +397,7 @@ class ITunes
       int seconds = (totalTime % ITunes.MILLISEC_PER_MIN) 
             / ITunes.MILLISEC_PER_SEC;
       String rtnStr = "";
+      
       if (minutes != 0)
       {
          rtnStr += minutes + " minutes";
@@ -358,8 +407,6 @@ class ITunes
             rtnStr += " ";
       }
       return rtnStr + seconds + " seconds";
-      // return (minutes == 0 ? "" : "" + minutes + " minutes") 
-           // + (seconds == 0 ? "" : " " + seconds + " seconds");
    }
    
 } // end class ITunes
