@@ -2,11 +2,16 @@
  * Assignment 7, CS1A, Anand Venkataraman, Fall 2016
  * @author Paul Hayter
  */
-
 public class Foothill
 {
    public final static int ARRAY_SIZE = 10;
-
+/**
+ * Test main for class ITunes including instantiation of individual objects and
+ * objects in an array. Tests include instantiation with both default and
+ * parameterized constructors, display(), toString(), setDefaults(), selected 
+ * 'set' methods and timeInMinutesAndSeconds().
+ * @param args not used
+ */
    public static void  main(String[] args)
    {   
       ITunes itune1 = new ITunes();
@@ -111,6 +116,15 @@ public class Foothill
       System.exit(0);
    } // end main
    
+   /**
+    * Returns boolean true if the sizes of the four input arrays are each of
+    * length ARRAY_SIZE, otherwise returns false.
+    * @param nameArr String array of names
+    * @param artistArr String array of artists
+    * @param rateArr integer array of bitrates
+    * @param timeArr integer array of totalTimes (play times)
+    * @return the specified boolean
+    */
    private static boolean inputSizesOK(String[] nameArr, String[] artistArr,
          int[] rateArr, int[] timeArr)
    {
@@ -121,6 +135,12 @@ public class Foothill
    }
 } // end class Foothill
 
+/**
+ * Class manages and displays four iTunes values for each object. These values 
+ * are name for song name, artist for artist name, bitrate for digital recording
+ * rate, and totalTime for play time (in milliseconds).
+ * @author Paul Hayter
+ */
 class ITunes
 {
    private String name;
@@ -142,11 +162,25 @@ class ITunes
    public static final String DEFAULT_STRING = " (undefined) ";
    
    // constructors
+   /**
+    * Default constructor
+    */
    ITunes()
    {
       setDefaults();
    }
    
+   /**
+    * Parameterized constructor. name and artist fields are subject to length
+    * restrictions defined with MIN_STR_LENGTH and MAX_STR_LENGTH. bitrate field
+    * subject to restrictions defined with MIN_BITRATE and MAX_BITRATE.
+    * totalTime subject to restrictions defined with MIN_PLAY_TIME and 
+    * MAX_PLAY_TIME.
+    * @param name String with song name 
+    * @param artist String with artist name
+    * @param bitrate integer with bitrate of song recording
+    * @param totalTime integer with song play time in milliseconds
+    */
    ITunes(String name, String artist, int bitrate, int totalTime)
    {
       if (!setName(name))
@@ -160,6 +194,13 @@ class ITunes
    }
    
    // validators
+   /**
+    * returns boolean true if input String str is between the minimum and
+    * maximum lengths (inclusive) as defined by MIN_STR_LENGTH and 
+    * MAX_STR_LENGTH, otherwise returns false.
+    * @param str input String for length testing
+    * @return specified boolean
+    */
    static boolean validString(String str)
    {
       if (str.length() >= MIN_STR_LENGTH && str.length() <= MAX_STR_LENGTH)
@@ -167,6 +208,13 @@ class ITunes
       return false;
    }
    
+   /**
+    * returns boolean true if input bitrate is between the minimum and
+    * maximum rates (inclusive) as defined by MIN_BITRATE and MAX_BITRATE,
+    * otherwise returns false.
+    * @param bitrate input bitrate for rate testing
+    * @return specified boolean
+    */
    static boolean validBitrate(int bitrate)
    {
       if (bitrate >= MIN_BITRATE && bitrate <= MAX_BITRATE)
@@ -174,6 +222,13 @@ class ITunes
       return false;
    }
 
+   /**
+    * returns boolean true if input totalTime is between the minimum and
+    * maximum rates (inclusive) as defined by MIN_PLAY_TIME and MAX_PLAY_TIME,
+    * otherwise returns false.
+    * @param totalTime input totalTime for play time testing
+    * @return specified boolean
+    */
    static boolean validTotalTime(int totalTime)
    {
       if (totalTime >= MIN_PLAY_TIME && totalTime <= MAX_PLAY_TIME)
@@ -182,6 +237,12 @@ class ITunes
    }
    
    // mutators
+   /**
+    * if name is valid per validString() then sets name field to input name and
+    * returns boolean true; otherwise returns false.
+    * @param name String to set name field to
+    * @return specified boolean
+    */
    boolean setName(String name)
    {
       if (!ITunes.validString(name))
@@ -190,6 +251,12 @@ class ITunes
       return true;
    }
    
+   /**
+    * if artist is valid per validString() then sets artist field to input 
+    * artist and returns boolean true; otherwise returns false.
+    * @param artist String to set artist field to
+    * @return specified boolean
+    */
    boolean setArtist(String artist)
    {
       if (!ITunes.validString(artist))
@@ -198,6 +265,12 @@ class ITunes
       return true;
    }
 
+   /**
+    * if bitrate is valid per validBitrate() then sets bitrate field to input
+    * bitrate and returns boolean true; otherwise returns false.
+    * @param bitrate
+    * @return specified boolean
+    */
    boolean setBitrate(int bitrate)
    {
       if (!ITunes.validBitrate(bitrate))
@@ -206,6 +279,12 @@ class ITunes
       return true;
    }
    
+   /**
+    * if totalTime is valid per validTotalTime() then sets totalTime field to 
+    * input totalTime and returns boolean true; otherwise returns false.
+    * @param totalTime
+    * @return specified boolean
+    */
    boolean setTotaltime(int totalTime)
    {
       if (!ITunes.validTotalTime(totalTime))
@@ -221,6 +300,11 @@ class ITunes
    int getTotalTime() { return totalTime; }
    
    // supporting methods
+   /**
+    * returns a formatted string containing the name, artist, totalTime and
+    * bitrate fields.
+    * @return specified String
+    */
    @Override
    public String toString()
    {
@@ -230,6 +314,10 @@ class ITunes
             + " / Bit Rate: " + bitrate + "k"; 
    }
    
+   /**
+    * clears class object fields to defaults defined in DEFAULT_STRING, 
+    * DEFAULT_BITRATE and DEFAULT_PLAY_TIME.
+    */
    void setDefaults()
    {
       name = DEFAULT_STRING;
@@ -238,11 +326,18 @@ class ITunes
       totalTime = DEFAULT_PLAY_TIME;      
    }
    
+   /**
+    * displays values of one class object
+    */
    void display()
    {
       System.out.println("ITunes song ------:\n" + toString());
    }
    
+   /**
+    * returns formatted String with play time shown in minutes and seconds
+    * @return specified String
+    */
    String timeInMinutesAndSeconds()
    {
       int minutes = totalTime / MILLISEC_PER_MIN;
