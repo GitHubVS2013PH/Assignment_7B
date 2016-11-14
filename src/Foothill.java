@@ -149,17 +149,23 @@ public class Foothill
       }
       
       // tests for timeInMinutesAndSeconds()
-      System.out.println("tests for leading and trailing spaces in "
-            + "timeInMinutesAndSeconds()");
-      System.out.println("The following should show no leading or trailing "
-            + "spaces in \ntotalTime values and a single space between minutes "
-            + "and seconds:");
+      System.out.println("Tests for leading & trailing spaces & proper plurals "
+            + "in timeInMinutesAndSeconds");
+      System.out.println("The following should show:"
+            + "\n(1)no leading or trailing spaces intotalTime values,"
+            + "\n(2)a single space between minutes and seconds, and"
+            + "\n(3)proper plurals on minutes and seconds");
       itune1.setTotaltime(5000);
-      itune2.setTotaltime(2* 60 * 1000 + 5000);
+      itune2.setTotaltime(2* 60 * 1000 + 1000);
       itune3.setTotaltime(60 * 60 * 1000);
+      itune4.setTotaltime(60 * 1000);
+      tunesArray[0].setTotaltime(2* 60 * 1000 + 5000);
       System.out.println("-->" + itune1.timeInMinutesAndSeconds() + "<--");
       System.out.println("-->" + itune2.timeInMinutesAndSeconds() + "<--");
-      System.out.println("-->" + itune3.timeInMinutesAndSeconds() + "<--"); 
+      System.out.println("-->" + itune3.timeInMinutesAndSeconds() + "<--");
+      System.out.println("-->" + itune4.timeInMinutesAndSeconds() + "<--");       
+      System.out.println("-->" + tunesArray[0].timeInMinutesAndSeconds() 
+            + "<--");       
             
       System.exit(0);
    } // end main
@@ -388,7 +394,8 @@ class ITunes
    
    /**
     * returns formatted String with totalTime shown in minutes and seconds.
-    * String has no leading or trailing spaces.
+    * String has no leading or trailing spaces. Plural on minutes and seconds is
+    * correct.
     * @return specified String
     */
    String timeInMinutesAndSeconds()
@@ -400,13 +407,16 @@ class ITunes
       
       if (minutes != 0)
       {
-         rtnStr += minutes + " minutes";
+         rtnStr += minutes + " minute" + (minutes > 1 ? "s" : "");
          if (seconds == 0)
             return rtnStr;
          else 
             rtnStr += " ";
       }
-      return rtnStr + seconds + " seconds";
+      return rtnStr + seconds + " second" + (seconds > 1 ? "s" : "");
    }
    
 } // end class ITunes
+
+/******************************** RUN ******************************************
+ ******************************************************************************/
