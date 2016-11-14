@@ -1,5 +1,5 @@
 /**
- * Assignment 7, CS1A, Anand Venkataraman, Fall 2016
+ * Assignment 7 Option B, CS1A, Anand Venkataraman, Fall 2016
  * @author Paul Hayter
  */
 public class Foothill
@@ -23,7 +23,7 @@ public class Foothill
       ITunes itune4 = new ITunes("Ave Maria", 
             "Chanticleer", 705, 4 * 60 * 1000 + 2000);
       
-      System.out.println("*** Displaying original instantiated objects");
+      System.out.println("*** Display original instantiated objects");
       System.out.println("First object using default constructor and other"
             + " objects using legal parameters");
       System.out.println("\niTune1");
@@ -41,17 +41,21 @@ public class Foothill
       itune1.setBitrate(100);
       itune1.setTotaltime(1000 * 60 * 3 + 5000);
       
+      itune2.setArtist("Chanticleer");
+      
       itune3.setName("5 Foot 1");
       itune3.setArtist("Iggy Pop");
       
-      System.out.println("\n*** Displaying after legal mutations in 2 objects");
+      itune4.setBitrate(600);
+      
+      System.out.println("\n*** Display after legal mutations in all objects");
       System.out.println("\niTune1, name, artist, bitrate & totalTime mutated");
       itune1.display();
-      System.out.println("\niTune2 unmutated");
+      System.out.println("\niTune2 artist mutated");
       itune2.display();
       System.out.println("\niTune3, name and artist mutated");
       itune3.display();
-      System.out.println("\niTune4 unmutated");
+      System.out.println("\niTune4 bitrate mutated");
       itune4.display();
             
       // setDefault all objects
@@ -60,7 +64,7 @@ public class Foothill
       itune3.setDefaults();
       itune4.setDefaults();
 
-      System.out.println("\n*** Displaying after invoking setDefaults");
+      System.out.println("\n*** Display after invoking setDefaults");
       System.out.println("All objects should display their default values");
       System.out.println("\niTune1");
       itune1.display();
@@ -152,7 +156,7 @@ public class Foothill
       System.out.println("Tests for leading & trailing spaces & proper plurals "
             + "in timeInMinutesAndSeconds");
       System.out.println("The following should show:"
-            + "\n(1)no leading or trailing spaces intotalTime values,"
+            + "\n(1)no leading or trailing spaces in totalTime values,"
             + "\n(2)a single space between minutes and seconds, and"
             + "\n(3)proper plurals on minutes and seconds");
       itune1.setTotaltime(5000);
@@ -192,7 +196,7 @@ public class Foothill
 } // end class Foothill
 
 /**
- * Class manages and displays four iTunes values for each object. These values 
+ * Class manages and displays four iTunes values for each object. These values
  * are name for song name, artist for artist name, bitrate for digital recording
  * rate, and totalTime for play time (in milliseconds).
  * @author Paul Hayter
@@ -366,8 +370,8 @@ class ITunes
    @Override
    public String toString()
    {
-      return "Title: \"" + name
-            + "\" / Artist: " + artist
+      return "Title: \"" + name + "\""
+            + " / Artist: " + artist
             + "\nPlaying Time: " + timeInMinutesAndSeconds()
             + " / Bit Rate: " + bitrate + "k"; 
    }
@@ -394,8 +398,8 @@ class ITunes
    
    /**
     * returns formatted String with totalTime shown in minutes and seconds.
-    * String has no leading or trailing spaces. Plural on minutes and seconds is
-    * correct.
+    * String has no leading or trailing spaces. Correctly uses plural on minutes 
+    * and seconds.
     * @return specified String
     */
    String timeInMinutesAndSeconds()
@@ -419,4 +423,152 @@ class ITunes
 } // end class ITunes
 
 /******************************** RUN ******************************************
- ******************************************************************************/
+*** Display original instantiated objects
+First object using default constructor and other objects using legal parameters
+
+iTune1
+ITunes song ------:
+Title: " (undefined) " / Artist:  (undefined) 
+Playing Time: 5 seconds / Bit Rate: 64k
+
+iTune2
+ITunes song ------:
+Title: "Stairway to Heaven" / Artist: Led Zeppelin
+Playing Time: 5 minutes / Bit Rate: 64k
+
+iTune3
+ITunes song ------:
+Title: "Lust for Life" / Artist: Iggy and the Stooges
+Playing Time: 3 minutes / Bit Rate: 705k
+
+iTune4
+ITunes song ------:
+Title: "Ave Maria" / Artist: Chanticleer
+Playing Time: 4 minutes 2 seconds / Bit Rate: 705k
+
+*** Display after legal mutations in all objects
+
+iTune1, name, artist, bitrate & totalTime mutated
+ITunes song ------:
+Title: "Here Comes the Sun" / Artist: Beatles
+Playing Time: 3 minutes 5 seconds / Bit Rate: 100k
+
+iTune2 artist mutated
+ITunes song ------:
+Title: "Stairway to Heaven" / Artist: Chanticleer
+Playing Time: 5 minutes / Bit Rate: 64k
+
+iTune3, name and artist mutated
+ITunes song ------:
+Title: "5 Foot 1" / Artist: Iggy Pop
+Playing Time: 3 minutes / Bit Rate: 705k
+
+iTune4 bitrate mutated
+ITunes song ------:
+Title: "Ave Maria" / Artist: Chanticleer
+Playing Time: 4 minutes 2 seconds / Bit Rate: 600k
+
+*** Display after invoking setDefaults
+All objects should display their default values
+
+iTune1
+ITunes song ------:
+Title: " (undefined) " / Artist:  (undefined) 
+Playing Time: 5 seconds / Bit Rate: 64k
+
+iTune2
+ITunes song ------:
+Title: " (undefined) " / Artist:  (undefined) 
+Playing Time: 5 seconds / Bit Rate: 64k
+
+iTune3
+ITunes song ------:
+Title: " (undefined) " / Artist:  (undefined) 
+Playing Time: 5 seconds / Bit Rate: 64k
+
+iTune4
+ITunes song ------:
+Title: " (undefined) " / Artist:  (undefined) 
+Playing Time: 5 seconds / Bit Rate: 64k
+
+*** Testing mutator's boolean returns
+Correctly rejected bad setArtist mutation
+Correctly rejected bad setBitrate mutation
+Correctly accepted good setBitrate mutation
+Correctly accepted good setName mutation
+
+*** Testing ITunes Class with arrays
+Expected results are:
+
+tune 0: illegal bitrate, use default bitrate: 64
+tune 1: illegal totalTime, use default totalTime: 5000
+tune 2: all legal parameters
+tune 3: all legal parameters
+tune 4: all legal parameters
+tune 5: all legal parameters
+tune 6: illegal name, use default name:  (undefined) 
+tune 7: illegal artist, use default artist:  (undefined) 
+tune 8: illegal bitrate, use default bitrate: 64
+tune 9: illegal totalTime, use default totalTime: 5000
+
+Array tune 0 is:
+ITunes song ------:
+Title: "Stairway to Heaven" / Artist: Led Zeppelin
+Playing Time: 5 seconds / Bit Rate: 64k
+
+Array tune 1 is:
+ITunes song ------:
+Title: "Lust for Life" / Artist: Iggy and the Stooges
+Playing Time: 5 seconds / Bit Rate: 705k
+
+Array tune 2 is:
+ITunes song ------:
+Title: "Ave Maria" / Artist: Chanticleer
+Playing Time: 4 minutes 5 seconds / Bit Rate: 100k
+
+Array tune 3 is:
+ITunes song ------:
+Title: "Here Comes the Sun" / Artist: Beatles
+Playing Time: 4 minutes 10 seconds / Bit Rate: 120k
+
+Array tune 4 is:
+ITunes song ------:
+Title: "Overture of 1812" / Artist: Boston Pops
+Playing Time: 12 minutes / Bit Rate: 700k
+
+Array tune 5 is:
+ITunes song ------:
+Title: "Roadrunner" / Artist: Jonathon Richman
+Playing Time: 10 minutes 36 seconds / Bit Rate: 64k
+
+Array tune 6 is:
+ITunes song ------:
+Title: " (undefined) " / Artist: 50 Cent
+Playing Time: 6 minutes 28 seconds / Bit Rate: 450k
+
+Array tune 7 is:
+ITunes song ------:
+Title: "Fugue in D Minor" / Artist:  (undefined) 
+Playing Time: 12 minutes 17 seconds / Bit Rate: 705k
+
+Array tune 8 is:
+ITunes song ------:
+Title: "Victory Dance" / Artist: Elvis Costello
+Playing Time: 60 minutes / Bit Rate: 64k
+
+Array tune 9 is:
+ITunes song ------:
+Title: "Denis" / Artist: Blondie
+Playing Time: 5 seconds / Bit Rate: 64k
+
+Tests for leading & trailing spaces & proper plurals in timeInMinutesAndSeconds
+The following should show:
+(1)no leading or trailing spaces in totalTime values,
+(2)a single space between minutes and seconds, and
+(3)proper plurals on minutes and seconds
+-->5 seconds<--
+-->2 minutes 1 second<--
+-->60 minutes<--
+-->1 minute<--
+-->2 minutes 5 seconds<--
+*******************************************************************************/
